@@ -7,37 +7,23 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Users")
+@Getter
+@Document(collection = "Patients")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Patient {
 
     @Id
     private String id;
     private String name;
     private String email;
-    private String senha;
-    private String CRM;
+    private String address;
+    private Number age;
+    private String phone;
 
-    //getters e setters
 
-
-    public String getCRM() {
-        return CRM;
-    }
-
-    public void setCRM(String CRM) {
-        this.CRM = CRM;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+    //getters setters
 
     public String getId() {
         return id;
@@ -61,5 +47,29 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Number getAge() {
+        return age;
+    }
+
+    public void setAge(Number age) {
+        this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
