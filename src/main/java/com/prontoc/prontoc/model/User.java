@@ -18,18 +18,7 @@ public class User {
     private String name;
     private String email;
     private String senha;
-    private String CRM;
-
     //getters e setters
-
-
-    public String getCRM() {
-        return CRM;
-    }
-
-    public void setCRM(String CRM) {
-        this.CRM = CRM;
-    }
 
     public String getSenha() {
         return senha;

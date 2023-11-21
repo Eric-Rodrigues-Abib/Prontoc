@@ -1,6 +1,6 @@
 package com.prontoc.prontoc.controller;
 
-import com.prontoc.prontoc.model.AuthService;
+import com.prontoc.prontoc.service.AuthService;
 import com.prontoc.prontoc.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
