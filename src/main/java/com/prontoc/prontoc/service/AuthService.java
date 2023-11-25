@@ -12,8 +12,14 @@ public class AuthService {
     @Autowired
     private UserRepository usuarioRepository;
 
-    public boolean autenticar(String email, String senha) {
+    public boolean autenticar(String email, String password) {
         User usuario = usuarioRepository.findByEmail(email);
-        return usuario != null && usuario.getSenha().equals(senha);
+        System.out.println(usuario);
+        if(usuario != null && password.equals(usuario.getPassword()))
+        {
+            return true;
+        }else {
+            return false;
+        }
     }
 }

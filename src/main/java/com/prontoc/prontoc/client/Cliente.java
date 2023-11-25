@@ -7,25 +7,12 @@ public class Cliente
     public static final String HOST_PADRAO = "localhost";
     public static final int PORTA_PADRAO = 6969;
 
-    public static void main(String[] args)
+    public Cliente (String senha)
     {
-        if (args.length>2)
-        {
-            System.err.println ("Uso esperado: java Cliente [HOST [PORTA]]\n");
-            return;
-        }
-
         Socket conexao = null;
         try
         {
-            String host=Cliente.HOST_PADRAO;
-            int porta=Cliente.PORTA_PADRAO;
-
-            if(args.length>0)
-                host = args[0];
-            if(args.length==2)
-                porta = Integer.parseInt(args[1]);
-            conexao = new Socket(host, porta);
+            conexao = new Socket(Cliente.HOST_PADRAO, Cliente.PORTA_PADRAO);
         }
         catch (Exception erro)
         {
@@ -77,6 +64,50 @@ public class Cliente
         tratadoraDeComunicadoDeDesligamento.start();
 
         //a partir daqui faremos a parte de receber e enviar ao servidor
+        try
+        {
+            servidor.receba(new TratadoraDeLogin(senha));
+
+            Comunicado comunicado = null;
+            if(comunicado instanceof RespostaSenha)
+            {
+                RespostaSenha respostaSenha =(RespostaSenha)servidor.envie();
+                System.out.println("Resultado da senha: "+respostaSenha.getResultado()+"\n");
+            }
+        }
+        catch (Exception erro)
+        {
+            System.err.println ("Erro de comunicacao com o servidor;");
+            System.err.println ("Tente novamente!");
+            System.err.println ("Caso o erro persista, termine o programa");
+            System.err.println ("e volte a tentar mais tarde!\n");
+        }
+
+//        try
+//        {
+//            servidor.receba(new TratadoraDeLogin(senha));
+//        }
+//        catch (Exception erro)
+//        {}
+
+//        try
+//        {
+//            Comunicado comunicado = null;
+//            do
+//            {
+//                comunicado =(Comunicado)servidor.espie();
+//            }
+//            while (!(comunicado instanceof RespostaSenha));
+//            RespostaSenha respostaSenha = (RespostaSenha)servidor.envie();
+//            System.out.println("Resultado da senha: "+respostaSenha.getResultado());
+//        }
+//        catch (Exception erro)
+//        {
+//            System.err.println ("Erro de comunicacao com o servidor;");
+//            System.err.println ("Tente novamente!");
+//            System.err.println ("Caso o erro persista, termine o programa");
+//            System.err.println ("e volte a tentar mais tarde!\n");
+//        }
     }
 }
 

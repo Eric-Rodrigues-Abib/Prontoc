@@ -17,15 +17,15 @@ public class User {
     private String id;
     private String name;
     private String email;
-    private String senha;
+    private String password;
     //getters e setters
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String senha) {
+        this.password = senha;
     }
 
     public String getId() {

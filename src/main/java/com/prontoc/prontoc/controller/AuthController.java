@@ -1,13 +1,15 @@
 package com.prontoc.prontoc.controller;
 
+import com.prontoc.prontoc.client.Cliente;
 import com.prontoc.prontoc.service.AuthService;
 import com.prontoc.prontoc.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping
 public class AuthController {
 
     @Autowired
@@ -17,11 +19,11 @@ public class AuthController {
     // (representado pela anotação (@RequestBody) com os campos de email e senha.
 
     @PostMapping("/login") //endpoint
-    public String login(@RequestBody User usuario) {
-        if (authService.autenticar(usuario.getEmail(), usuario.getSenha())) {
-            return "Login realizado com sucesso!";
+    public ResponseEntity<String> login(@RequestBody User user) {
+        if (authService.autenticar(user.getEmail(), user.getPassword())) {
+            return ResponseEntity.ok("Login realizado com sucesso!");
         } else {
-            return "Credenciais inválidas. Verifique seu email e senha.";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas. Verifique seu email e senha.");
         }
     }
 }
