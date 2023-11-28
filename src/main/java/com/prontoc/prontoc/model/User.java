@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 
     @Id
-    private String id;
+    private String crm;
     private String name;
     private String email;
     private String password;
@@ -28,12 +28,12 @@ public class User {
         this.password = senha;
     }
 
-    public String getId() {
-        return id;
+    public String getCrm() {
+        return crm;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCrm(String id) {
+        this.crm = crm;
     }
 
     public String getName() {

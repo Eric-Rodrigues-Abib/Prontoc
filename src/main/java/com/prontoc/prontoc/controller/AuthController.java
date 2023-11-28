@@ -26,4 +26,9 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas. Verifique seu email e senha.");
         }
     }
+
+    @PostMapping("/signin") //endpoint
+    public ResponseEntity<String> signin(@RequestBody User user){
+        return ResponseEntity.ok("Criado com sucesso");
+    }
 }

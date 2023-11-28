@@ -7,7 +7,7 @@ public class Cliente
     public static final String HOST_PADRAO = "localhost";
     public static final int PORTA_PADRAO = 6969;
 
-    public Cliente (String senha)
+    public boolean isValida(String password)
     {
         Socket conexao = null;
         try
@@ -17,7 +17,7 @@ public class Cliente
         catch (Exception erro)
         {
             System.err.println("Indique o servidor e a porta corretos!\n");
-            return;
+            return false;
         }
 
         ObjectOutputStream transmissor = null;
@@ -28,7 +28,7 @@ public class Cliente
         catch (Exception erro)
         {
             System.err.println("Indique o servidor e a porta corretos!\n");
-            return;
+            return false;
         }
 
         ObjectInputStream receptor = null;
@@ -39,7 +39,7 @@ public class Cliente
         catch (Exception erro)
         {
             System.err.println("Indique o servidor e a porta corretos!\n");
-            return;
+            return false;
         }
 
         Parceiro servidor = null;
@@ -50,7 +50,7 @@ public class Cliente
         catch (Exception erro)
         {
             System.err.println("Indique o servidor e a porta corretos!\n");
-            return;
+            return false;
         }
 
         TratadoraDeComunicadoDeDesligamento tratadoraDeComunicadoDeDesligamento = null;
@@ -66,13 +66,18 @@ public class Cliente
         //a partir daqui faremos a parte de receber e enviar ao servidor
         try
         {
-            servidor.receba(new TratadoraDeLogin(senha));
+            servidor.receba(new TratadoraDeLogin(password));
 
             Comunicado comunicado = null;
-            if(comunicado instanceof RespostaSenha)
+            if(comunicado instanceof TratadoraDeLogin)
             {
                 RespostaSenha respostaSenha =(RespostaSenha)servidor.envie();
-                System.out.println("Resultado da senha: "+respostaSenha.getResultado()+"\n");
+                if(respostaSenha.equals(true))
+                {
+                    System.out.println("Resultado da senha: "+respostaSenha.getResultado()+"\n");
+                    return true;
+                }
+                return false;
             }
         }
         catch (Exception erro)
@@ -82,32 +87,7 @@ public class Cliente
             System.err.println ("Caso o erro persista, termine o programa");
             System.err.println ("e volte a tentar mais tarde!\n");
         }
-
-//        try
-//        {
-//            servidor.receba(new TratadoraDeLogin(senha));
-//        }
-//        catch (Exception erro)
-//        {}
-
-//        try
-//        {
-//            Comunicado comunicado = null;
-//            do
-//            {
-//                comunicado =(Comunicado)servidor.espie();
-//            }
-//            while (!(comunicado instanceof RespostaSenha));
-//            RespostaSenha respostaSenha = (RespostaSenha)servidor.envie();
-//            System.out.println("Resultado da senha: "+respostaSenha.getResultado());
-//        }
-//        catch (Exception erro)
-//        {
-//            System.err.println ("Erro de comunicacao com o servidor;");
-//            System.err.println ("Tente novamente!");
-//            System.err.println ("Caso o erro persista, termine o programa");
-//            System.err.println ("e volte a tentar mais tarde!\n");
-//        }
+        return false;
     }
 }
 
