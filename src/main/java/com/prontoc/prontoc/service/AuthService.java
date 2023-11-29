@@ -22,4 +22,14 @@ public class AuthService {
             return false;
         }
     }
+
+    public void createnewuser(String name, String email, String password, String crm){
+        User usuario = new User();
+        usuario.setName(name);
+        usuario.setEmail(email);
+        usuario.setPassword(password);
+        usuario.setCrm(crm);
+
+        usuarioRepository.save(usuario);
+    }
 }
