@@ -2,19 +2,19 @@ package com.prontoc.prontoc.client;
 
 public class RespostaSenha extends Comunicado
 {
-    private String Resultado;
+    private Boolean mensagem;
 
-    public RespostaSenha (String Resultado)
+    public RespostaSenha (Boolean mensagem)
     {
-        this.Resultado = Resultado;
+        this.mensagem = mensagem;
     }
 
-    public String getResultado() {
-        return Resultado;
+    public Boolean getResultado() {
+        return mensagem;
     }
 
     public String toString()
     {
-        return (" "+this.Resultado);
+        return (" "+this.mensagem);
     }
 }

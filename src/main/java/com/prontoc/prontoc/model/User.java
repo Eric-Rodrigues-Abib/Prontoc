@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 public class User {
 
-    @Id
     private String crm;
     private String name;
     private String email;
@@ -32,7 +31,7 @@ public class User {
         return crm;
     }
 
-    public void setCrm(String id) {
+    public void setCrm(String crm) {
         this.crm = crm;
     }
 
