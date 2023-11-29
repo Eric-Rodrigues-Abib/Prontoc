@@ -67,13 +67,16 @@ public class Cliente
         try
         {
             servidor.receba(new TratadoraDeLogin(password));
-            RespostaSenha respostaSenha =(RespostaSenha)servidor.envie();
-            if(respostaSenha.equals(true))
-            {
-                System.out.println("Resultado da senha: "+respostaSenha.getResultado()+"\n");
-                return true;
+            Comunicado comunicado = null;
+            if(comunicado instanceof TratadoraDeLogin){
+                RespostaSenha respostaSenha =(RespostaSenha)servidor.envie();
+                if(respostaSenha.equals(true))
+                {
+                    System.out.println("Resultado da senha: "+respostaSenha.getResultado()+"\n");
+                    return true;
+                }
+                return false;
             }
-            return false;
         }
         catch (Exception erro)
         {
