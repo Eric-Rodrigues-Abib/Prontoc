@@ -16,7 +16,7 @@ import java.util.List;
 public class Patient {
 
     @Id
-    private String Patientid;
+    private String id;
     private String nameP;
     private Number age;
     private String birth;
@@ -29,12 +29,12 @@ public class Patient {
     //getters setters
 
 
-    public String getPatientid() {
-        return Patientid;
+    public String getId() {
+        return id;
     }
 
-    public void setPatientid(String patientid) {
-        Patientid = patientid;
+    public void setId(String patientid) {
+        id = patientid;
     }
 
     public String getNameP() {

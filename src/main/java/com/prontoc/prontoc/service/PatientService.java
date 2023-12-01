@@ -29,30 +29,30 @@ public class PatientService {
         return patientRepository.findById(id);
     }
 
-    public Patient CreateNewPatient(Patient patient, User crm)
-    {
-        Optional<Patient> existingPatientOptional = patientRepository.findById(patient.getPatientid());
-
-        if(existingPatientOptional.isPresent())
-        {
-            Patient existingPatient = existingPatientOptional.get();
-            List<User> currentDoctor = existingPatient.getCrm();
-
-            if(!currentDoctor.contains(crm))
-            {
-                currentDoctor.add(crm);
-                existingPatient.setCrm(currentDoctor);
-                return patientRepository.save(existingPatient);
-            }
-            else
-            {
-                return existingPatient;
-            }
-        }
-        else
-        {
-            patient.setCrm(List.of(crm));
-            return patientRepository.save(patient);
-        }
-    }
+//    public Patient CreateNewPatient(Patient patient, User crm)
+//    {
+//        Optional<Patient> existingPatientOptional = patientRepository.findById(patient.getPatientid());
+//
+//        if(existingPatientOptional.isPresent())
+//        {
+//            Patient existingPatient = existingPatientOptional.get();
+//            List<User> currentDoctor = existingPatient.getCrm();
+//
+//            if(!currentDoctor.contains(crm))
+//            {
+//                currentDoctor.add(crm);
+//                existingPatient.setCrm(currentDoctor);
+//                return patientRepository.save(existingPatient);
+//            }
+//            else
+//            {
+//                return existingPatient;
+//            }
+//        }
+//        else
+//        {
+//            patient.setCrm(List.of(crm));
+//            return patientRepository.save(patient);
+//        }
+//    }
 }
