@@ -1,7 +1,8 @@
 package com.prontoc.prontoc.client;
+import com.prontoc.prontoc.Comunicados.Comunicado;
+
 import java.io.*;
 import java.net.*;
-import java.util.*;
 import java.util.concurrent.Semaphore;
 
 public class Parceiro
@@ -48,32 +49,50 @@ public class Parceiro
 
     public Comunicado espie () throws Exception
     {
+        Comunicado ret = null;
+        System.out.println("entrando no espie");
         try
         {
             this.mutEx.acquireUninterruptibly();
-            if (this.proximoComunicado==null) this.proximoComunicado = (Comunicado)this.receptor.readObject();
+            ret = this.proximoComunicado;
             this.mutEx.release();
-            return this.proximoComunicado;
+            if (ret==null) {
+                ret = (Comunicado) this.receptor.readObject();
+                this.mutEx.acquireUninterruptibly();
+                this.proximoComunicado = ret;
+                this.mutEx.release();
+            }
         }
         catch (Exception erro)
         {
             throw new Exception ("Erro de recepcao");
         }
+        System.out.println("retornando do espie:" + ret);
+        return ret;
     }
 
     public Comunicado envie () throws Exception
     {
+        Comunicado ret = null;
         try
         {
-            if (this.proximoComunicado==null) this.proximoComunicado = (Comunicado)this.receptor.readObject();
-            Comunicado ret         = this.proximoComunicado;
-            this.proximoComunicado = null;
-            return ret;
+            this.mutEx.acquireUninterruptibly();
+            ret = this.proximoComunicado;
+            this.mutEx.release();
+            if (ret==null) {
+                ret = (Comunicado) this.receptor.readObject();
+                this.mutEx.acquireUninterruptibly();
+                this.proximoComunicado = ret;
+                this.mutEx.release();
+            }
+
+
         }
         catch (Exception erro)
         {
             throw new Exception ("Erro de recepcao");
         }
+        return ret;
     }
 
     public void adeus () throws Exception

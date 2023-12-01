@@ -27,7 +27,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin") //endpoint
-    public ResponseEntity<String> signin(@RequestBody User user){
+    public ResponseEntity<?> signin(@RequestBody User user){
         Cliente cliente = new Cliente();
         boolean senhaValida = cliente.isValida(user.getPassword());
         if(senhaValida)

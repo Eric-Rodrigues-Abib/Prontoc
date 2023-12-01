@@ -1,11 +1,15 @@
 package com.prontoc.prontoc.client;
+import com.prontoc.prontoc.Comunicados.Comunicado;
+import com.prontoc.prontoc.Comunicados.Resultado;
+import com.prontoc.prontoc.Comunicados.TratamentoDeSenha;
+
 import java.net.*;
 import java.io.*;
 
 public class Cliente
 {
     public static final String HOST_PADRAO = "localhost";
-    public static final int PORTA_PADRAO = 6969;
+    public static final int PORTA_PADRAO = 5500;
 
     public boolean isValida(String password)
     {
@@ -53,37 +57,46 @@ public class Cliente
             return false;
         }
 
-        TratadoraDeComunicadoDeDesligamento tratadoraDeComunicadoDeDesligamento = null;
-        try
-        {
-            tratadoraDeComunicadoDeDesligamento = new TratadoraDeComunicadoDeDesligamento(servidor);
-        }
-        catch (Exception erro)
-        {}
-
-        tratadoraDeComunicadoDeDesligamento.start();
+//        TratadoraDeComunicadoDeDesligamento tratadoraDeComunicadoDeDesligamento = null;
+//        try
+//        {
+//            tratadoraDeComunicadoDeDesligamento = new TratadoraDeComunicadoDeDesligamento(servidor);
+//        }
+//        catch (Exception erro)
+//        {}
+//
+//        tratadoraDeComunicadoDeDesligamento.start();
 
         //a partir daqui faremos a parte de receber e enviar ao servidor
+        System.out.println("Bem Vindo ao servidor!");
         try
         {
-            servidor.receba(new TratadoraDeLogin(password));
-            Comunicado comunicado = null;
-            if(comunicado instanceof TratadoraDeLogin){
-                RespostaSenha respostaSenha =(RespostaSenha)servidor.envie();
-                if(respostaSenha.equals(true))
-                {
-                    System.out.println("Resultado da senha: "+respostaSenha.getResultado()+"\n");
-                    return true;
-                }
-                return false;
+            System.out.println("Enviando ao servidor: " + password);
+            servidor.receba(new TratamentoDeSenha(password));
+            System.out.println("Senha enviado ao servidor: " + password);
+            Comunicado comunicado=null;
+            System.out.println(comunicado);
+            System.out.println("Esperando resposta do servidor....");
+
+            comunicado = (Comunicado) servidor.envie();
+
+            Resultado resultado = (Resultado) servidor.envie();
+            System.out.println("Resposta recebida do servidor: " + resultado.getResultado());
+            if(resultado.getResultado())
+            {
+                return true;
             }
-        }
-        catch (Exception erro)
+
+            return false;
+
+
+        } catch (Exception erro)
         {
-            System.err.println ("Erro de comunicacao com o servidor;");
-            System.err.println ("Tente novamente!");
-            System.err.println ("Caso o erro persista, termine o programa");
-            System.err.println ("e volte a tentar mais tarde!\n");
+            System.out.println(erro);
+            System.err.println("Erro de comunicacao com o servidor;");
+            System.err.println("Tente novamente!");
+            System.err.println("Caso o erro persista, termine o programa");
+            System.err.println("e volte a tentar mais tarde!\n");
         }
         return false;
     }

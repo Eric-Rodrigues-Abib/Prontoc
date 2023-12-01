@@ -1,5 +1,5 @@
 package com.prontoc.prontoc.client;
-import java.net.*;
+import com.prontoc.prontoc.Comunicados.ComunicadoDeDesligamento;
 
 public class TratadoraDeComunicadoDeDesligamento extends Thread
 {
@@ -19,12 +19,11 @@ public class TratadoraDeComunicadoDeDesligamento extends Thread
         {
             try
             {
-                if (this.servidor.espie() instanceof ComunicadoDeDesligamento)
-                {
-                    System.out.println ("\nO servidor vai ser desligado agora;");
-                    System.err.println ("volte mais tarde!\n");
-                    System.exit(0);
-                }
+                this.servidor.envie();
+                System.out.println ("\nO servidor vai ser desligado agora;");
+                System.err.println ("volte mais tarde!\n");
+                System.exit(0);
+
             }
             catch (Exception erro)
             {}
