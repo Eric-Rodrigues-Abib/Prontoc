@@ -1,15 +1,13 @@
 package com.prontoc.prontoc.controller;
 
 import com.prontoc.prontoc.model.Patient;
+import com.prontoc.prontoc.model.User;
 import com.prontoc.prontoc.service.PatientService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +20,7 @@ public class PatientController {
     private PatientService patientService;
 
     //util para trabalhar com front-end para retornar códigos de status adequados
-    @GetMapping("/patients")
+    @GetMapping("/allpatients")
     public ResponseEntity<List<Patient>> getAllPatients(){
         return new ResponseEntity<List<Patient>>(patientService.AllPatients(), HttpStatus.OK);
     }
@@ -35,5 +33,8 @@ public class PatientController {
         return new ResponseEntity<Optional<Patient>>(patientService.singlePatient(id), HttpStatus.OK);
     }
 
+
+    @PostMapping("/addpatient")
+    public ResponseEntity<?> addNewPatient(@RequestBody Patient patient, @RequestBody User user){return null;}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 public class User {
 
+    @Id
     private String crm;
     private String name;
     private String email;

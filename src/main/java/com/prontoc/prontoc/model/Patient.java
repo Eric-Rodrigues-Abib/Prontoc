@@ -2,10 +2,12 @@ package com.prontoc.prontoc.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
+
+import java.util.List;
 
 @Document(collection = "Patients")
 @Data
@@ -14,38 +16,33 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Patient {
 
     @Id
-    private String id;
-    private String name;
-    private String email;
-    private String address;
+    private String Patientid;
+    private String nameP;
     private Number age;
-    private String phone;
+    private String birth;
+    private String sex;
+    private List<String> contact;
+    @DocumentReference
+    private List<User> crm;
 
 
     //getters setters
 
-    public String getId() {
-        return id;
+
+    public String getPatientid() {
+        return Patientid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPatientid(String patientid) {
+        Patientid = patientid;
     }
 
-    public String getName() {
-        return name;
+    public String getNameP() {
+        return nameP;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setNameP(String nameP) {
+        this.nameP = nameP;
     }
 
     public Number getAge() {
@@ -56,19 +53,35 @@ public class Patient {
         this.age = age;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getBirth() {
+        return birth;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setBirth(String birth) {
+        this.birth = birth;
     }
 
-    public String getAddress() {
-        return address;
+    public String getSex() {
+        return sex;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public List<String> getContact() {
+        return contact;
+    }
+
+    public void setContact(List<String> contact) {
+        this.contact = contact;
+    }
+
+    public List<User> getCrm() {
+        return crm;
+    }
+
+    public void setCrm(List<User> crm) {
+        this.crm = crm;
     }
 }
