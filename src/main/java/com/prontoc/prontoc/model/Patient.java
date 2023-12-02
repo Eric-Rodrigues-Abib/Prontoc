@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "Patients")
@@ -21,9 +22,11 @@ public class Patient {
     private Number age;
     private String birth;
     private String sex;
-    private List<String> contact;
+    private String email;
+    private String address;
+    private String phone;
     @DocumentReference
-    private List<User> crm;
+    private List<String> crm;
 
 
     //getters setters
@@ -33,8 +36,8 @@ public class Patient {
         return id;
     }
 
-    public void setId(String patientid) {
-        id = patientid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNameP() {
@@ -69,19 +72,44 @@ public class Patient {
         this.sex = sex;
     }
 
-    public List<String> getContact() {
-        return contact;
+    public String getEmail() {
+        return email;
     }
 
-    public void setContact(List<String> contact) {
-        this.contact = contact;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public List<User> getCrm() {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public List<String> getCrm() {
         return crm;
     }
 
-    public void setCrm(List<User> crm) {
+    public void setCrm(List<String> crm) {
         this.crm = crm;
+    }
+
+    public void addCrmMedicosrelacinados(String crm)
+    {
+        if(this.crm == null)
+        {
+            this.crm = new ArrayList<>();
+        }
+        this.crm.add(crm);
     }
 }

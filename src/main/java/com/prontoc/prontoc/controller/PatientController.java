@@ -34,7 +34,5 @@ public class PatientController {
     }
 
 
-//    @PostMapping("/addpatient")
-//    public ResponseEntity<?> addNewPatient(@RequestBody Patient patient, @RequestBody User user){return null;}
 
 }
