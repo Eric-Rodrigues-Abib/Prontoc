@@ -14,15 +14,17 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/patients")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PatientController {
 
     @Autowired
     private PatientService patientService;
 
+
     //util para trabalhar com front-end para retornar códigos de status adequados
     @GetMapping("/allpatients")
-    public ResponseEntity<List<Patient>> getAllPatients(){
-        return new ResponseEntity<List<Patient>>(patientService.AllPatients(), HttpStatus.OK);
+    public List<Patient> getAllPatients(){
+        return patientService.getAllPatients();
     }
 
     //estamos tentando pesquisar um paciente pelo seu ID

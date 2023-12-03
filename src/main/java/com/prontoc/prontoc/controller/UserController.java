@@ -14,6 +14,7 @@ import java.awt.*;
 import static org.springframework.web.servlet.function.ServerResponse.noContent;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/user")
 public class UserController {
 
@@ -22,6 +23,12 @@ public class UserController {
 
     @Autowired
     private PatientService patientService;
+
+    @GetMapping("/home")
+    public ResponseEntity<?> Homepage(@PathVariable String crm, User user)
+    {
+        return null;
+    }
 
     @GetMapping("/{crm}/pacientes")
     public ResponseEntity<?> getPacienteDoMédico(@PathVariable String crm)

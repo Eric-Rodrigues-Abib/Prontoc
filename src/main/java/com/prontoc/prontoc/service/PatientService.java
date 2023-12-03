@@ -21,7 +21,7 @@ public class PatientService {
     @Autowired
     private PatientRepository patientRepository;
 
-    public List<Patient> AllPatients(){
+    public List<Patient> getAllPatients() {
         return patientRepository.findAll();
     }
 

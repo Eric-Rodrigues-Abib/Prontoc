@@ -25,7 +25,6 @@ public class Patient {
     private String email;
     private String address;
     private String phone;
-    @DocumentReference
     private List<String> crm;
 
 
